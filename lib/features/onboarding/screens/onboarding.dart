@@ -1,28 +1,28 @@
-import 'package:asstylesolver/common/divider.dart';
+import 'package:asstylesolver/core/common/divider.dart';
 import 'package:asstylesolver/core/slider_images.dart';
 import 'package:asstylesolver/pallate/app_colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../common/background_image.dart';
-import '../../../common/clippers/star.dart';
+import '../../../core/common/background_image.dart';
+import '../../../core/common/clippers/star.dart';
 import '../../../core/build_carsour_images.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+class OnBoardingScreen extends StatelessWidget {
+  final VoidCallback onComplete;
 
-  @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
-}
+  const OnBoardingScreen({Key? key, required this.onComplete})
+      : super(key: key);
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const BackGroundImage(),
+          const BackGroundImage(
+            image: 'assets/onboarding/background.jpg',
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,19 +106,22 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         const SizedBox(
                           width: 34,
                         ),
-                        SizedBox(
-                          height: 70,
-                          width: 70,
-                          child: ClipPath(
-                            clipper: StarClipper(16),
-                            child: Container(
-                              height: 150,
-                              color: Pallet.boarderColor,
-                              child: const Center(
-                                child: Icon(
-                                  Icons.arrow_forward_outlined,
-                                  size: 40,
-                                  color: Colors.white,
+                        InkWell(
+                          onTap: onComplete,
+                          child: SizedBox(
+                            height: 70,
+                            width: 70,
+                            child: ClipPath(
+                              clipper: StarClipper(16),
+                              child: Container(
+                                height: 150,
+                                color: Pallet.boarderColor,
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.arrow_forward_outlined,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
